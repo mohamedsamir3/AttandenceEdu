@@ -284,6 +284,8 @@
 		let courseName = localStorage.getItem("courseName")
 		document.getElementById('qr-value').value = courseName
 		const qr = new QRCode(document.getElementById('qr-code'), "https://www.instagram.com/Fe.Developers/");
+		const { encryptQR } = require('qr-code-encryption');
+		decryptQR('qr-code').then((msg) => console.log(msg))
 		function generateNewQR() {
 			if (document.getElementById("qr-value").value.length == 0) {
 				alert("Enter lecture name")
@@ -293,8 +295,8 @@
 				let toValue = document.getElementById('qr-value-time-to').value;
 				let dateValue = document.getElementById('qr-value-time-date').value;
 				console.log(dateValue);
-				const DOCTOR_NAME = "Dr-" + document.getElementById('qr-value-doctor_name').value;
-				const value = `${nameValue} ${DOCTOR_NAME} ${fromValue} ${toValue} ${dateValue}`
+				const DOCTOR_NAME =document.getElementById('qr-value-doctor_name').value;
+				const value =`${nameValue} ${DOCTOR_NAME} ${fromValue}${toValue} ${dateValue}`
 				document.getElementById('qr-code').classList.add('qr-code-reveal');
 				qr.clear();
 				qr.makeCode(value);
